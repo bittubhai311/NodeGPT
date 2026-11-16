@@ -1,0 +1,6 @@
+{
+  "name": "NovaGPT",
+  "description": "A premium multimodal GPT-style AI assistant with free built-in Gemini AI, custom settings, voice, vision, and cloud chat sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,165 @@
+{
+  "entities": {
+    "ChatThread": {
+      "title": "ChatThread",
+      "description": "A multi-turn AI conversation thread owned by a specific authenticated user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the authenticated Google user who owns this thread."
+        },
+        "title": {
+          "type": "string",
+          "description": "Display title of the conversation thread."
+        },
+        "personaId": {
+          "type": "string",
+          "description": "Identifier of the AI persona active for this thread."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "Gemini model identifier used in this thread (e.g., gemini-3.8-flash)."
+        },
+        "lastMessagePreview": {
+          "type": "string",
+          "description": "Short preview snippet of the latest message in the thread."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the thread was created (FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the thread was last updated (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "personaId",
+        "modelName",
+        "lastMessagePreview",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "An individual user or AI model message inside a conversation thread.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the authenticated Google user who owns this message."
+        },
+        "threadId": {
+          "type": "string",
+          "description": "The ID of the parent ChatThread."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["user", "model"],
+          "description": "Message author role: 'user' or 'model'."
+        },
+        "content": {
+          "type": "string",
+          "description": "Markdown/text content of the message."
+        },
+        "hasImage": {
+          "type": "boolean",
+          "description": "Whether an inline image was attached to this prompt."
+        },
+        "imageLabel": {
+          "type": "string",
+          "description": "Descriptive label or summary for an attached image."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the message was created (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "threadId",
+        "role",
+        "content",
+        "hasImage",
+        "imageLabel",
+        "createdAt"
+      ]
+    },
+    "UserSettings": {
+      "title": "UserSettings",
+      "description": "Per-user AI model, persona, temperature, voice, and API connection preferences.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the authenticated Google user."
+        },
+        "selectedModel": {
+          "type": "string",
+          "description": "Selected Gemini model identifier (e.g., gemini-3.8-flash, gemini-3.5-flash-lite, gemini-4-argon)."
+        },
+        "selectedPersonaId": {
+          "type": "string",
+          "description": "Active AI persona preset ID."
+        },
+        "customSystemPrompt": {
+          "type": "string",
+          "description": "User-defined custom system instructions."
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Sampling temperature between 0.0 and 2.0."
+        },
+        "useCustomApiKey": {
+          "type": "boolean",
+          "description": "Whether custom API key mode is toggled in settings."
+        },
+        "customApiKeyHint": {
+          "type": "string",
+          "description": "Masked or saved custom API key label in user settings."
+        },
+        "autoSpeakResponses": {
+          "type": "boolean",
+          "description": "Whether AI responses should be read aloud automatically via TextToSpeech."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when preferences were last updated (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "selectedModel",
+        "selectedPersonaId",
+        "customSystemPrompt",
+        "temperature",
+        "useCustomApiKey",
+        "customApiKeyHint",
+        "autoSpeakResponses",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/threads/{threadId}": {
+      "schema": { "$ref": "#/entities/ChatThread" },
+      "description": "Stores per-user AI conversation threads."
+    },
+    "/users/{userId}/threads/{threadId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Stores chronological messages within a user's conversation thread."
+    },
+    "/users/{userId}/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/UserSettings" },
+      "description": "Stores per-user AI configuration, persona, temperature, and API connection settings."
+    }
+  }
+}

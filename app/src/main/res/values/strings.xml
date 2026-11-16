@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">NovaGPT</string>
+    <string name="sign_in_title">NovaGPT</string>
+    <string name="sign_in_subtitle">Multimodal AI workspace with built-in free Gemini intelligence, custom personas, voice, vision, and cloud sync.</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="new_chat">New Chat</string>
+    <string name="chat_history">Conversations</string>
+    <string name="search_chats_hint">Search conversations…</string>
+    <string name="settings_title">AI Studio &amp; Settings</string>
+    <string name="prompt_hint">Ask NovaGPT anything, attach a photo, or use voice…</string>
+    <string name="send_message">Send message</string>
+    <string name="attach_image">Attach image</string>
+    <string name="voice_input">Voice input</string>
+    <string name="speak_response">Read aloud</string>
+    <string name="stop_speaking">Stop reading</string>
+    <string name="copy_text">Copy message</string>
+    <string name="copy_code">Copy code</string>
+    <string name="regenerate_response">Regenerate response</string>
+    <string name="delete_thread">Delete conversation</string>
+    <string name="sign_out">Sign out</string>
+    <string name="free_ai_badge">Built-in Free Gemini AI Active</string>
+    <string name="custom_key_badge">Custom API Key Mode Active</string>
+</resources>
